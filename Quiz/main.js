@@ -38,6 +38,14 @@ function loadQuiz(){
 }
 
 document.querySelector("button").addEventListener("click", () => {
+    if(document.querySelector("button").innerHTML=='Reset'){
+        document.querySelector("button").innerHTML = 'Submit';
+        index = iCorrect = 0;
+        document.querySelector("input:checked").checked = false;
+        document.querySelector(".content>ul").style.display = "block";
+        loadQuiz();
+        return;
+    }
     if(document.querySelector("input:checked")!=null){
         index++;
         if(arrQuiz[index-1] != undefined){
@@ -48,8 +56,10 @@ document.querySelector("button").addEventListener("click", () => {
         if(arrQuiz[index] != undefined){
             loadQuiz();
         }else{
-            let html = '<h2>Success: '+iCorrect+'/'+arrQuiz.length+'</h2>';
-            document.getElementsByClassName('content')[0].innerHTML = html;
+            document.querySelector(".content>ul").style.display = "none";
+            let html = 'Success: '+iCorrect+'/'+arrQuiz.length;
+            document.querySelector(".content>h2").innerHTML = html;
+            document.querySelector("button").innerHTML = 'Reset';
         }
     }
 });
